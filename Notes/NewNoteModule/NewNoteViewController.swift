@@ -27,7 +27,6 @@ class NewNoteViewController: UIViewController {
     
     private let detailsNoteTextField = BrownTextField()
     
-    
     private let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
@@ -38,7 +37,7 @@ class NewNoteViewController: UIViewController {
         return button
     }()
     
-    
+    private let noteModel = NoteModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +63,24 @@ class NewNoteViewController: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
-        print("saveButtonTapped")
+        setModel()
     }
     
+    private func setModel() {
+        noteModel.noteName = getTitleTextFieldText()
+        noteModel.noteDetail = getDetailsNoteTextFieldText()
+        print(noteModel)
+    }
+    
+    private func getTitleTextFieldText() -> String {
+        guard let text = titleNoteTextField.text else { return "" }
+        return text
+    }
+    
+    private func getDetailsNoteTextFieldText() -> String {
+        guard let text = detailsNoteTextField.text else { return "" }
+        return text
+    }
 }
 
 
