@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		C425D98C2954B8A100ADA01B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98B2954B8A100ADA01B /* TableViewCell.swift */; };
 		C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */; };
+		C425D9912954C16C00ADA01B /* BrownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D9902954C16C00ADA01B /* BrownTextField.swift */; };
+		C425D9942954CFF500ADA01B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C425D9932954CFF500ADA01B /* Realm */; };
+		C425D9962954CFF500ADA01B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C425D9952954CFF500ADA01B /* RealmSwift */; };
 		C492A1E2295387BC0027002E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E1295387BC0027002E /* AppDelegate.swift */; };
 		C492A1E4295387BC0027002E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E3295387BC0027002E /* SceneDelegate.swift */; };
 		C492A1E6295387BC0027002E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E5295387BC0027002E /* MainViewController.swift */; };
@@ -25,6 +28,7 @@
 /* Begin PBXFileReference section */
 		C425D98B2954B8A100ADA01B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
+		C425D9902954C16C00ADA01B /* BrownTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrownTextField.swift; sourceTree = "<group>"; };
 		C492A1DE295387BC0027002E /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C492A1E1295387BC0027002E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C492A1E3295387BC0027002E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,12 +49,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C425D9962954CFF500ADA01B /* RealmSwift in Frameworks */,
+				C425D9942954CFF500ADA01B /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C425D98F2954C13B00ADA01B /* Unique */ = {
+			isa = PBXGroup;
+			children = (
+				C425D9902954C16C00ADA01B /* BrownTextField.swift */,
+			);
+			path = Unique;
+			sourceTree = "<group>";
+		};
 		C492A1D5295387BC0027002E = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +99,7 @@
 		C492A1F92953986C0027002E /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				C425D98F2954C13B00ADA01B /* Unique */,
 				C492A1FA295398910027002E /* UIKit */,
 			);
 			path = Extentions;
@@ -160,6 +175,10 @@
 			dependencies = (
 			);
 			name = Notes;
+			packageProductDependencies = (
+				C425D9932954CFF500ADA01B /* Realm */,
+				C425D9952954CFF500ADA01B /* RealmSwift */,
+			);
 			productName = Notes;
 			productReference = C492A1DE295387BC0027002E /* Notes.app */;
 			productType = "com.apple.product-type.application";
@@ -188,6 +207,9 @@
 				Base,
 			);
 			mainGroup = C492A1D5295387BC0027002E;
+			packageReferences = (
+				C425D9922954CFF500ADA01B /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = C492A1DF295387BC0027002E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -224,6 +246,7 @@
 				C492A1E4295387BC0027002E /* SceneDelegate.swift in Sources */,
 				C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */,
 				C492A1FC295398CB0027002E /* UIFont + extentions.swift in Sources */,
+				C425D9912954C16C00ADA01B /* BrownTextField.swift in Sources */,
 				C492A1FE29539AAB0027002E /* UILabel + extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +457,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C425D9922954CFF500ADA01B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C425D9932954CFF500ADA01B /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C425D9922954CFF500ADA01B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		C425D9952954CFF500ADA01B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C425D9922954CFF500ADA01B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C492A1D6295387BC0027002E /* Project object */;
 }
