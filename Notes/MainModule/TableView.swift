@@ -23,8 +23,8 @@ class TableView: UITableView {
     }
     
     private func configure() {
-        backgroundColor = .red
-        register(UITableViewCell.self, forCellReuseIdentifier: idTableView)
+//        backgroundColor = .red
+        register(TableViewCell.self, forCellReuseIdentifier: idTableView)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
