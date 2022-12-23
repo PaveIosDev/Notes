@@ -37,7 +37,7 @@ class NewNoteViewController: UIViewController {
         return button
     }()
     
-    private let noteModel = NoteModel()
+    private var noteModel = NoteModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,12 +64,13 @@ class NewNoteViewController: UIViewController {
     
     @objc private func saveButtonTapped() {
         setModel()
+        RealmManager.shared.saveNoteModel(noteModel)
     }
     
     private func setModel() {
         noteModel.noteName = getTitleTextFieldText()
         noteModel.noteDetail = getDetailsNoteTextFieldText()
-        print(noteModel)
+//        noteModel = NoteModel()
     }
     
     private func getTitleTextFieldText() -> String {

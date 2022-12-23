@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C425D98C2954B8A100ADA01B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98B2954B8A100ADA01B /* TableViewCell.swift */; };
+		C425D98C2954B8A100ADA01B /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */; };
 		C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */; };
 		C425D9912954C16C00ADA01B /* BrownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D9902954C16C00ADA01B /* BrownTextField.swift */; };
 		C425D9942954CFF500ADA01B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C425D9932954CFF500ADA01B /* Realm */; };
 		C425D9962954CFF500ADA01B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C425D9952954CFF500ADA01B /* RealmSwift */; };
 		C425D9982954D46F00ADA01B /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D9972954D46F00ADA01B /* NoteModel.swift */; };
+		C425D99B2955F5C300ADA01B /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D99A2955F5C300ADA01B /* RealmManager.swift */; };
 		C492A1E2295387BC0027002E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E1295387BC0027002E /* AppDelegate.swift */; };
 		C492A1E4295387BC0027002E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E3295387BC0027002E /* SceneDelegate.swift */; };
 		C492A1E6295387BC0027002E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E5295387BC0027002E /* MainViewController.swift */; };
@@ -27,10 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C425D98B2954B8A100ADA01B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		C425D9902954C16C00ADA01B /* BrownTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrownTextField.swift; sourceTree = "<group>"; };
 		C425D9972954D46F00ADA01B /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		C425D99A2955F5C300ADA01B /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		C492A1DE295387BC0027002E /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C492A1E1295387BC0027002E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C492A1E3295387BC0027002E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 			path = Unique;
 			sourceTree = "<group>";
 		};
+		C425D9992955F58B00ADA01B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C425D99A2955F5C300ADA01B /* RealmManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C492A1D5295387BC0027002E = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 				C492A2002954A7450027002E /* MainModule */,
 				C492A2012954A7790027002E /* NewNoteModule */,
 				C492A1F92953986C0027002E /* Extentions */,
+				C425D9992955F58B00ADA01B /* Service */,
 				C492A2022954A8390027002E /* Resources */,
 				C492A1EA295387BF0027002E /* Assets.xcassets */,
 				C492A1EC295387C00027002E /* LaunchScreen.storyboard */,
@@ -131,7 +142,7 @@
 			children = (
 				C492A1E5295387BC0027002E /* MainViewController.swift */,
 				C492A1F529538A640027002E /* TableView.swift */,
-				C425D98B2954B8A100ADA01B /* TableViewCell.swift */,
+				C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */,
 				C425D9972954D46F00ADA01B /* NoteModel.swift */,
 			);
 			path = MainModule;
@@ -242,10 +253,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C492A1F8295394830027002E /* NewNoteViewController.swift in Sources */,
-				C425D98C2954B8A100ADA01B /* TableViewCell.swift in Sources */,
+				C425D98C2954B8A100ADA01B /* NoteTableViewCell.swift in Sources */,
 				C492A1E6295387BC0027002E /* MainViewController.swift in Sources */,
 				C492A1F629538A640027002E /* TableView.swift in Sources */,
 				C492A1E2295387BC0027002E /* AppDelegate.swift in Sources */,
+				C425D99B2955F5C300ADA01B /* RealmManager.swift in Sources */,
 				C492A1E4295387BC0027002E /* SceneDelegate.swift in Sources */,
 				C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */,
 				C425D9982954D46F00ADA01B /* NoteModel.swift in Sources */,

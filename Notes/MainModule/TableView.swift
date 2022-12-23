@@ -11,6 +11,8 @@ class TableView: UITableView {
     
     private let idTableView = "idTableView"
     
+    private var notesArray = [NoteModel]()
+    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
@@ -24,7 +26,7 @@ class TableView: UITableView {
     
     private func configure() {
 //        backgroundColor = .red
-        register(TableViewCell.self, forCellReuseIdentifier: idTableView)
+        register(NoteTableViewCell.self, forCellReuseIdentifier: idTableView)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -32,26 +34,35 @@ class TableView: UITableView {
         dataSource = self
         delegate = self
     }
+    
+    public func setNotesArray(array: [NoteModel]) {
+        notesArray = array
+    }
 }
+
+//MARK: - UITableViewDataSource
 
 extension TableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        30
+        notesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idTableView, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: idTableView, for: indexPath) as? NoteTableViewCell else {
+            return UITableViewCell()
+        }
+        let noteModel = notesArray[indexPath.row]
+        cell.configure(model: noteModel)
         return cell
     }
-    
-    
 }
 
+//MARK: - UITableViewDelegate
 
 extension TableView: UITableViewDelegate {
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
+    }
     
 }

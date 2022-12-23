@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
 
@@ -20,13 +21,29 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    private let tableView = TableView()
+     public let tableView = TableView()
+    
+    private let localRealm = try! Realm()
+    private var noteArray: Results<NoteModel>!
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        tableView.reloadData()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupViews()
         setConstraints()
+        
+        getNotes()
+        var testArray = [NoteModel]()
+        noteArray.forEach { model in
+            testArray.append(model)
+        }
+        tableView.setNotesArray(array: testArray)
+        tableView.reloadData()
     }
 
     private func setupViews() {
@@ -42,7 +59,11 @@ class MainViewController: UIViewController {
         present(newNoteViewController, animated: true)
         print("addNoteButtonTapped")
     }
-
+    
+    private func getNotes() {
+        noteArray = localRealm.objects(NoteModel.self)
+        tableView.reloadData()
+    }
 }
 
 //MARK: - setConstraints
