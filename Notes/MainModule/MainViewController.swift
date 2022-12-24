@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
 
     private let titleLabel = UILabel(text: "Заметки", font: .robotoBold24(), textColor: .specialBlack)
     
-
     private lazy var addNoteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "plus"), for: .normal)
@@ -26,10 +25,11 @@ class MainViewController: UIViewController {
     private let localRealm = try! Realm()
     private var noteArray: Results<NoteModel>!
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        tableView.reloadData()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateArrayNotes()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +38,11 @@ class MainViewController: UIViewController {
         setConstraints()
         
         getNotes()
-        var testArray = [NoteModel]()
-        noteArray.forEach { model in
-            testArray.append(model)
-        }
-        tableView.setNotesArray(array: testArray)
-        tableView.reloadData()
+        updateArrayNotes()
     }
 
     private func setupViews() {
-        view.backgroundColor  = #colorLiteral(red: 0.9411764706, green: 0.9294117647, blue: 0.8862745098, alpha: 1)
+        view.backgroundColor = .specialBackground
         view.addSubview(titleLabel)
         view.addSubview(tableView)
         view.addSubview(addNoteButton)
@@ -62,6 +57,15 @@ class MainViewController: UIViewController {
     
     private func getNotes() {
         noteArray = localRealm.objects(NoteModel.self)
+        tableView.reloadData()
+    }
+    
+    private func updateArrayNotes() {
+        var testArray = [NoteModel]()
+        noteArray.forEach { model in
+            testArray.append(model)
+        }
+        tableView.setNotesArray(array: testArray)
         tableView.reloadData()
     }
 }

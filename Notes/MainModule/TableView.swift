@@ -25,7 +25,10 @@ class TableView: UITableView {
     }
     
     private func configure() {
-//        backgroundColor = .red
+        backgroundColor = .none
+        separatorStyle = .none
+        bounces = false
+        showsVerticalScrollIndicator = false
         register(NoteTableViewCell.self, forCellReuseIdentifier: idTableView)
         translatesAutoresizingMaskIntoConstraints = false
     }
