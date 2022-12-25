@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41C1B672958925600BE4BD0 /* EditingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41C1B662958925600BE4BD0 /* EditingNoteViewController.swift */; };
 		C425D98C2954B8A100ADA01B /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */; };
 		C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */; };
 		C425D9912954C16C00ADA01B /* BrownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D9902954C16C00ADA01B /* BrownTextField.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C41C1B662958925600BE4BD0 /* EditingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingNoteViewController.swift; sourceTree = "<group>"; };
 		C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		C425D9902954C16C00ADA01B /* BrownTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrownTextField.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C41C1B65295891F100BE4BD0 /* EditingNoteModule */ = {
+			isa = PBXGroup;
+			children = (
+				C41C1B662958925600BE4BD0 /* EditingNoteViewController.swift */,
+			);
+			path = EditingNoteModule;
+			sourceTree = "<group>";
+		};
 		C425D98F2954C13B00ADA01B /* Unique */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +109,7 @@
 				C492A1FF2954A7190027002E /* Aplication */,
 				C492A2002954A7450027002E /* MainModule */,
 				C492A2012954A7790027002E /* NewNoteModule */,
+				C41C1B65295891F100BE4BD0 /* EditingNoteModule */,
 				C492A1F92953986C0027002E /* Extentions */,
 				C425D9992955F58B00ADA01B /* Service */,
 				C492A2022954A8390027002E /* Resources */,
@@ -258,6 +269,7 @@
 				C492A1F629538A640027002E /* TableView.swift in Sources */,
 				C492A1E2295387BC0027002E /* AppDelegate.swift in Sources */,
 				C425D99B2955F5C300ADA01B /* RealmManager.swift in Sources */,
+				C41C1B672958925600BE4BD0 /* EditingNoteViewController.swift in Sources */,
 				C492A1E4295387BC0027002E /* SceneDelegate.swift in Sources */,
 				C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */,
 				C425D9982954D46F00ADA01B /* NoteModel.swift in Sources */,

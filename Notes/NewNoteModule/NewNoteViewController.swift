@@ -59,7 +59,6 @@ class NewNoteViewController: UIViewController {
 
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
-        print("closeButtonTapped")
     }
     
     @objc private func saveButtonTapped() {

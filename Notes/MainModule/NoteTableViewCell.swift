@@ -20,6 +20,14 @@ class NoteTableViewCell: UITableViewCell {
     private let titleNoteLabel = UILabel(text: "title", font: .robotoMedium14(), textColor: .black)
     
     private let textNoteLabel = UILabel(text: "text", font: .robotoMedium12(), textColor: .specialBlack)
+    
+    private let editingButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .green
+        button.setTitle("изменить", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,6 +47,7 @@ class NoteTableViewCell: UITableViewCell {
         addSubview(cellView)
         addSubview(titleNoteLabel)
         addSubview(textNoteLabel)
+        addSubview(editingButton)
     }
     
     public func configure(model: NoteModel) {
@@ -64,7 +73,10 @@ extension NoteTableViewCell {
             titleNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
             
             textNoteLabel.topAnchor.constraint(equalTo: titleNoteLabel.bottomAnchor, constant: 15),
-            textNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25)
+            textNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            
+            editingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            editingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -7)
         
         ])
 
