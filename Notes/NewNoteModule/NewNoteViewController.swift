@@ -63,13 +63,27 @@ class NewNoteViewController: UIViewController {
     
     @objc private func saveButtonTapped() {
         setModel()
-        RealmManager.shared.saveNoteModel(noteModel)
+        saveModel()
     }
     
     private func setModel() {
         noteModel.noteName = getTitleTextFieldText()
         noteModel.noteDetail = getDetailsNoteTextFieldText()
 //        noteModel = NoteModel()
+    }
+    
+    private func saveModel() {
+        let text = getTitleTextFieldText()
+        let count = text.filter { $0.isNumber || $0.isLetter }.count
+
+        if count != 0 {
+            RealmManager.shared.saveNoteModel(noteModel)
+//            noteModel = NoteModel()
+            presentSimpleAlert(title: "Успешно", message: nil)
+//            resetValues()
+        } else {
+            presentSimpleAlert(title: "Ошибка", message: "Заполните все поля")
+        }
     }
     
     private func getTitleTextFieldText() -> String {

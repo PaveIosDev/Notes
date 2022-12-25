@@ -35,7 +35,8 @@ class EditingNoteViewController: UIViewController {
     
     private let editingDetailsTextField = BrownTextField()
     
-    
+    private var noteModel = NoteModel()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,10 @@ class EditingNoteViewController: UIViewController {
     
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    public func setNoteModel(_ model: NoteModel) {
+        noteModel = model
     }
 }
 

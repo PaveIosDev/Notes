@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol NoteCellProtocol: AnyObject {
+    func editingButtonTapped(model: NoteModel)
+}
+
 class NoteTableViewCell: UITableViewCell {
     
     private let cellView: UIView = {
@@ -21,13 +25,19 @@ class NoteTableViewCell: UITableViewCell {
     
     private let textNoteLabel = UILabel(text: "text", font: .robotoMedium12(), textColor: .specialBlack)
     
-    private let editingButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .green
-        button.setTitle("изменить", for: .normal)
+    private lazy var editingButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("изм", for: .normal)
+//        button.backgroundColor = .green
+//        button.setImage(UIImage(named: "Edit"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(editingButtonTapped), for: .touchUpInside)
         return button
     }()
+
+    weak var noteCellDelegate: NoteCellProtocol?
+    
+    private var noteModel = NoteModel()
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,11 +53,18 @@ class NoteTableViewCell: UITableViewCell {
     
     
     private func setupViews() {
-        backgroundColor = .specialBackground
+        selectionStyle = .none
+        backgroundColor = .clear//.specialBackground
         addSubview(cellView)
         addSubview(titleNoteLabel)
         addSubview(textNoteLabel)
-        addSubview(editingButton)
+        contentView.addSubview(editingButton)
+//        addSubview(editingButton)
+    }
+    
+    @objc private func editingButtonTapped() {
+        noteCellDelegate?.editingButtonTapped(model: noteModel)
+        print("editingButtonTapped")
     }
     
     public func configure(model: NoteModel) {
@@ -75,8 +92,8 @@ extension NoteTableViewCell {
             textNoteLabel.topAnchor.constraint(equalTo: titleNoteLabel.bottomAnchor, constant: 15),
             textNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
             
-            editingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            editingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -7)
+            editingButton.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
+            editingButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -27)
         
         ])
 

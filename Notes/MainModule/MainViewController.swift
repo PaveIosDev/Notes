@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RealmSwift
+//import RealmSwift
 
 class MainViewController: UIViewController {
 
@@ -22,13 +22,17 @@ class MainViewController: UIViewController {
     
      public let tableView = TableView()
     
-    private let localRealm = try! Realm()
-    private var noteArray: Results<NoteModel>!
+//    private let localRealm = try! Realm()
+//    private var noteArray: Results<NoteModel>!
+    
+    private var noteArray = [NoteModel]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        getNotes()
         updateArrayNotes()
+
     }
     
     override func viewDidLoad() {
@@ -46,6 +50,7 @@ class MainViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(tableView)
         view.addSubview(addNoteButton)
+        tableView.mainDelegate = self
     }
     
     @objc private func addNoteButtonTapped() {
@@ -56,17 +61,38 @@ class MainViewController: UIViewController {
     }
     
     private func getNotes() {
-        noteArray = localRealm.objects(NoteModel.self)
+        let resultArray = RealmManager.shared.getResultsNoteModel()
+        noteArray = resultArray.map{$0}
         tableView.reloadData()
     }
     
     private func updateArrayNotes() {
-        var testArray = [NoteModel]()
-        noteArray.forEach { model in
-            testArray.append(model)
-        }
-        tableView.setNotesArray(array: testArray)
+        tableView.setNotesArray(array: noteArray)
         tableView.reloadData()
+    }
+}
+
+// MARK: - TableViewProtocol
+
+extension MainViewController: TableViewProtocol {
+    
+    func deleteNote(model: NoteModel, index: Int) {
+        RealmManager.shared.deleteNoteModel(model)
+        noteArray.remove(at: index)
+        tableView.setNotesArray(array: noteArray)
+        tableView.reloadData()
+    }
+}
+
+// MARK: - NoteCellProtocol
+
+extension MainViewController: NoteCellProtocol {
+  
+    func editingButtonTapped(model: NoteModel) {
+        let editingNoteViewController = EditingNoteViewController()
+        editingNoteViewController.modalPresentationStyle = .fullScreen
+        editingNoteViewController.setNoteModel(model)
+        present(editingNoteViewController, animated: true)
     }
 }
 

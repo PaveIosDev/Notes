@@ -7,17 +7,26 @@
 
 import UIKit
 
+protocol TableViewProtocol: AnyObject {
+    func deleteNote(model: NoteModel, index: Int)
+}
+
 class TableView: UITableView {
+    
+    weak var mainDelegate: TableViewProtocol?
     
     private let idTableView = "idTableView"
     
     private var notesArray = [NoteModel]()
     
+
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
         configure()
         setDelegates()
+        register(NoteTableViewCell.self, forCellReuseIdentifier: idTableView)
+
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +38,7 @@ class TableView: UITableView {
         separatorStyle = .none
         bounces = false
         showsVerticalScrollIndicator = false
-        register(NoteTableViewCell.self, forCellReuseIdentifier: idTableView)
+        delaysContentTouches = false
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -56,6 +65,7 @@ extension TableView: UITableViewDataSource {
         }
         let noteModel = notesArray[indexPath.row]
         cell.configure(model: noteModel)
+        cell.noteCellDelegate = mainDelegate as? NoteCellProtocol
         return cell
     }
 }
@@ -66,6 +76,18 @@ extension TableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            let deleteModel = self.notesArray[indexPath.row]
+            self.mainDelegate?.deleteNote(model: deleteModel, index: indexPath.row)
+        }
+
+        action.backgroundColor = .specialBackground
+        action.image = UIImage(named: "Delete")
+
+        return UISwipeActionsConfiguration(actions: [action])
     }
     
 }
