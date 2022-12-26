@@ -89,6 +89,23 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		C434AEB7295A2A9D00BA9C4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C425D9972954D46F00ADA01B /* NoteModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C434AEB8295A2B3800BA9C4D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */,
+				C492A1F529538A640027002E /* TableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C492A1D5295387BC0027002E = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				C492A1FF2954A7190027002E /* Aplication */,
+				C434AEB7295A2A9D00BA9C4D /* Model */,
 				C492A2002954A7450027002E /* MainModule */,
 				C492A2012954A7790027002E /* NewNoteModule */,
 				C41C1B65295891F100BE4BD0 /* EditingNoteModule */,
@@ -154,10 +172,8 @@
 		C492A2002954A7450027002E /* MainModule */ = {
 			isa = PBXGroup;
 			children = (
+				C434AEB8295A2B3800BA9C4D /* Views */,
 				C492A1E5295387BC0027002E /* MainViewController.swift */,
-				C492A1F529538A640027002E /* TableView.swift */,
-				C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */,
-				C425D9972954D46F00ADA01B /* NoteModel.swift */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";

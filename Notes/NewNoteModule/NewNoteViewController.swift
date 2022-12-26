@@ -9,15 +9,7 @@ import UIKit
 
 class NewNoteViewController: UIViewController {
 
-    private let titleLabel = UILabel(text: " Новая заметка", font:  .robotoMedium22(), textColor: .specialBlack)
-    
-    private let closeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let titleLabel = UILabel(text: "Новая заметка", font:  .robotoMedium22(), textColor: .specialBlack)
     
     private let titleNoteLabel = UILabel(text: "Название заметки", font: .robotoMedium14(), textColor: .specialLightBrown)
     
@@ -26,6 +18,14 @@ class NewNoteViewController: UIViewController {
     private let detailsNoteLabel = UILabel(text: "Подробно", font: .robotoMedium14(), textColor: .specialLightBrown)
     
     private let detailsNoteTextField = BrownTextField()
+    
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "closeButton"), for: .normal)
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private let saveButton: UIButton = {
         let button = UIButton()
@@ -69,7 +69,6 @@ class NewNoteViewController: UIViewController {
     private func setModel() {
         noteModel.noteName = getTitleTextFieldText()
         noteModel.noteDetail = getDetailsNoteTextFieldText()
-//        noteModel = NoteModel()
     }
     
     private func saveModel() {
@@ -78,9 +77,7 @@ class NewNoteViewController: UIViewController {
 
         if count != 0 {
             RealmManager.shared.saveNoteModel(noteModel)
-//            noteModel = NoteModel()
             presentSimpleAlert(title: "Успешно", message: nil)
-//            resetValues()
         } else {
             presentSimpleAlert(title: "Ошибка", message: "Заполните все поля")
         }
@@ -131,8 +128,6 @@ extension NewNoteViewController {
             saveButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 55),
             saveButton.widthAnchor.constraint(equalToConstant: 300)
-        
         ])
     }
-
 }

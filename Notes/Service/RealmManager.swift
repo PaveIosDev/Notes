@@ -18,7 +18,6 @@ class RealmManager {
         realm.objects(NoteModel.self)
     }
     
-    
     func saveNoteModel(_ model: NoteModel) {
         try! realm.write {
             realm.add(model)
@@ -30,9 +29,10 @@ class RealmManager {
             realm.delete(model)
         }
     }
+    
+    func updateNoteModel(_ model: NoteModel) {
+        try! realm.write {
+            realm.add(model)
+        }
+    }
 }
-
-
-//try! realm.write {
-//    realm.add(todo)
-//}

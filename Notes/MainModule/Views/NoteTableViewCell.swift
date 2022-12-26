@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol NoteCellProtocol: AnyObject {
     func editingButtonTapped(model: NoteModel)
@@ -27,9 +28,7 @@ class NoteTableViewCell: UITableViewCell {
     
     private lazy var editingButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("изм", for: .normal)
-//        button.backgroundColor = .green
-//        button.setImage(UIImage(named: "Edit"), for: .normal)
+        button.setImage(UIImage(named: "Edit"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(editingButtonTapped), for: .touchUpInside)
         return button
@@ -39,7 +38,6 @@ class NoteTableViewCell: UITableViewCell {
     
     private var noteModel = NoteModel()
 
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -51,26 +49,24 @@ class NoteTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupViews() {
         selectionStyle = .none
-        backgroundColor = .clear//.specialBackground
+        backgroundColor = .clear
         addSubview(cellView)
         addSubview(titleNoteLabel)
         addSubview(textNoteLabel)
         contentView.addSubview(editingButton)
-//        addSubview(editingButton)
     }
     
     @objc private func editingButtonTapped() {
         noteCellDelegate?.editingButtonTapped(model: noteModel)
-        print("editingButtonTapped")
     }
     
     public func configure(model: NoteModel) {
         titleNoteLabel.text = model.noteName
         textNoteLabel.text = model.noteDetail
     }
+
 }
 
 //MARK: - setConstraints
@@ -78,7 +74,6 @@ class NoteTableViewCell: UITableViewCell {
 extension NoteTableViewCell {
     
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
             
             cellView.topAnchor.constraint(equalTo: topAnchor, constant: 3),
@@ -94,8 +89,6 @@ extension NoteTableViewCell {
             
             editingButton.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
             editingButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -27)
-        
         ])
-
     }
 }

@@ -19,14 +19,12 @@ class TableView: UITableView {
     
     private var notesArray = [NoteModel]()
     
-
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
         configure()
         setDelegates()
         register(NoteTableViewCell.self, forCellReuseIdentifier: idTableView)
-
     }
     
     required init?(coder: NSCoder) {
@@ -55,6 +53,7 @@ class TableView: UITableView {
 //MARK: - UITableViewDataSource
 
 extension TableView: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         notesArray.count
     }
@@ -89,5 +88,4 @@ extension TableView: UITableViewDelegate {
 
         return UISwipeActionsConfiguration(actions: [action])
     }
-    
 }

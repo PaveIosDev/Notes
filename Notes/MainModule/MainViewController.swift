@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import RealmSwift
 
 class MainViewController: UIViewController {
 
@@ -20,10 +19,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-     public let tableView = TableView()
-    
-//    private let localRealm = try! Realm()
-//    private var noteArray: Results<NoteModel>!
+    public let tableView = TableView()
     
     private var noteArray = [NoteModel]()
     
@@ -32,7 +28,6 @@ class MainViewController: UIViewController {
         
         getNotes()
         updateArrayNotes()
-
     }
     
     override func viewDidLoad() {
@@ -114,8 +109,6 @@ extension MainViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-        
         ])
     }
-
 }
