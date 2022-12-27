@@ -32,7 +32,8 @@ class RealmManager {
     
     func updateNoteModel(_ model: NoteModel) {
         try! realm.write {
-            realm.add(model)
+            model.noteName = model.noteName
+            model.noteDetail = model.noteDetail
         }
     }
 }

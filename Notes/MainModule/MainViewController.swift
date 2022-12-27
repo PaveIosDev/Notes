@@ -23,6 +23,10 @@ class MainViewController: UIViewController {
     
     private var noteArray = [NoteModel]()
     
+//    private var noteModel = NoteModel()
+    
+//    private let editingNoteViewController = EditingNoteViewController()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -52,7 +56,6 @@ class MainViewController: UIViewController {
         let newNoteViewController = NewNoteViewController()
         newNoteViewController.modalPresentationStyle = .fullScreen
         present(newNoteViewController, animated: true)
-        print("addNoteButtonTapped")
     }
     
     private func getNotes() {
@@ -90,6 +93,13 @@ extension MainViewController: NoteCellProtocol {
         present(editingNoteViewController, animated: true)
     }
 }
+
+//extension MainViewController: EditingProtocol {
+//    func saveEditingButtonTapped() {
+//        editingNoteViewController.setNoteModel(noteModel)
+//        editingNoteViewController.updateNoteModel()
+//    }
+//}
 
 //MARK: - setConstraints
 

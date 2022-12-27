@@ -13,11 +13,11 @@ class NewNoteViewController: UIViewController {
     
     private let titleNoteLabel = UILabel(text: "Название заметки", font: .robotoMedium14(), textColor: .specialLightBrown)
     
-    private let titleNoteTextField = BrownTextField()
+    public let titleNoteTextField = BrownTextField()
     
     private let detailsNoteLabel = UILabel(text: "Подробно", font: .robotoMedium14(), textColor: .specialLightBrown)
     
-    private let detailsNoteTextField = BrownTextField()
+    public let detailsNoteTextField = BrownTextField()
     
     private let closeButton: UIButton = {
         let button = UIButton()

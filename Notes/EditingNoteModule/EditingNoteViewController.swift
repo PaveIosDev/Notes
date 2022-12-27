@@ -7,6 +7,10 @@
 
 import UIKit
 
+//protocol EditingProtocol: AnyObject {
+//    func saveEditingButtonTapped()
+//}
+
 class EditingNoteViewController: UIViewController {
 
     private let titleLabel = UILabel(text: "Редактирование заметки", font:  .robotoMedium22(), textColor: .specialBlack)
@@ -32,19 +36,23 @@ class EditingNoteViewController: UIViewController {
         button.setTitle("Сохранить", for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = .specialGreen
-        button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(saveEditingButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private var noteModel = NoteModel()
+//    weak var editingDelegate: EditingProtocol?
 
+    
+    private let noteTableViewCell = NoteTableViewCell() // !!!!!!!!!
+    private let tableView = TableView() //!!!!!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupViews()
         setConstraints()
-        loadNoteInfo()
     }
     
     private func setupViews() {
@@ -55,6 +63,7 @@ class EditingNoteViewController: UIViewController {
         view.addSubview(editingTitleTextField)
         view.addSubview(editingDetailsLabel)
         view.addSubview(editingDetailsTextField)
+        refreshTextFields(model: noteModel)
         view.addSubview(saveButton)
     }
     
@@ -62,36 +71,39 @@ class EditingNoteViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @objc private func saveButtonTapped() {
+    @objc private func saveEditingButtonTapped() {
         setNoteModel(noteModel)
-        
-        let noteArray = RealmManager.shared.getResultsNoteModel()
-
-        if noteArray.count == 0 {
-            RealmManager.shared.updateNoteModel(noteModel)
-        } else { return }
-
-        noteModel = NoteModel()
+        updateNoteModel()
     }
     
     public func setNoteModel(_ model: NoteModel) {
         noteModel = model
-        
-        guard let titleNote = editingTitleTextField.text,
-              let textNote = editingDetailsLabel.text else { return
-              }
-        
-        noteModel.noteName = titleNote
-        noteModel.noteDetail = textNote
+        noteModel.noteName = getEditingTitleTextFieldText()
+        noteModel.noteDetail = getEditingDetailsNoteTextFieldText()
     }
     
-    private func loadNoteInfo() {
-        let noteArray = RealmManager.shared.getResultsNoteModel()
-
-        if noteArray.count != 0 {
-            editingTitleTextField.text = noteArray[0].noteName
-            editingDetailsTextField.text = noteArray[0].noteDetail
-        }
+    public func refreshTextFields(model: NoteModel) {
+        
+        editingTitleTextField.text = model.noteName
+        editingDetailsTextField.text = model.noteDetail
+    }
+    
+    public func updateNoteModel() {
+            RealmManager.shared.updateNoteModel(noteModel)
+            presentSimpleAlert(title: "Успешно", message: nil)
+            self.noteTableViewCell.refreshLables(model: noteModel)
+        tableView.reloadData()
+        print(noteModel)
+    }
+    
+    private func getEditingTitleTextFieldText() -> String {
+        guard let text = editingTitleTextField.text else { return "" }
+        return text
+    }
+    
+    private func getEditingDetailsNoteTextFieldText() -> String {
+        guard let text = editingDetailsTextField.text else { return "" }
+        return text
     }
 }
 
