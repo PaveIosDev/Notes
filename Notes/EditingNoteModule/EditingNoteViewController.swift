@@ -7,10 +7,6 @@
 
 import UIKit
 
-//protocol EditingProtocol: AnyObject {
-//    func saveEditingButtonTapped()
-//}
-
 class EditingNoteViewController: UIViewController {
 
     private let titleLabel = UILabel(text: "Редактирование заметки", font:  .robotoMedium22(), textColor: .specialBlack)
@@ -31,19 +27,17 @@ class EditingNoteViewController: UIViewController {
         return button
     }()
     
-    private let saveButton: UIButton = {
+    private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = .specialGreen
-        button.addTarget(self, action: #selector(saveEditingButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private var noteModel = NoteModel()
-//    weak var editingDelegate: EditingProtocol?
-
     
     private let noteTableViewCell = NoteTableViewCell() // !!!!!!!!!
     private let tableView = TableView() //!!!!!
@@ -71,7 +65,7 @@ class EditingNoteViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @objc private func saveEditingButtonTapped() {
+    @objc private func saveButtonTapped() {
         setNoteModel(noteModel)
         updateNoteModel()
     }
@@ -92,8 +86,8 @@ class EditingNoteViewController: UIViewController {
             RealmManager.shared.updateNoteModel(noteModel)
             presentSimpleAlert(title: "Успешно", message: nil)
             self.noteTableViewCell.refreshLables(model: noteModel)
-        tableView.reloadData()
-        print(noteModel)
+            tableView.reloadData()
+            print(noteModel)    
     }
     
     private func getEditingTitleTextFieldText() -> String {

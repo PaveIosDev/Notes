@@ -20,12 +20,7 @@ class MainViewController: UIViewController {
     }()
     
     public let tableView = TableView()
-    
     private var noteArray = [NoteModel]()
-    
-//    private var noteModel = NoteModel()
-    
-//    private let editingNoteViewController = EditingNoteViewController()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,6 +34,7 @@ class MainViewController: UIViewController {
 
         setupViews()
         setConstraints()
+        setDelegates()
         
         getNotes()
         updateArrayNotes()
@@ -49,6 +45,10 @@ class MainViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(tableView)
         view.addSubview(addNoteButton)
+
+    }
+    
+    private func setDelegates() {
         tableView.mainDelegate = self
     }
     
@@ -93,13 +93,6 @@ extension MainViewController: NoteCellProtocol {
         present(editingNoteViewController, animated: true)
     }
 }
-
-//extension MainViewController: EditingProtocol {
-//    func saveEditingButtonTapped() {
-//        editingNoteViewController.setNoteModel(noteModel)
-//        editingNoteViewController.updateNoteModel()
-//    }
-//}
 
 //MARK: - setConstraints
 

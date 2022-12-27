@@ -38,8 +38,6 @@ class NoteTableViewCell: UITableViewCell {
     
     private var noteModel = NoteModel()
     
-//    private let editingNoteViewController = EditingNoteViewController()
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -57,7 +55,6 @@ class NoteTableViewCell: UITableViewCell {
         addSubview(cellView)
         addSubview(titleNoteLabel)
         addSubview(textNoteLabel)
-//        editingNoteViewController.refreshTextFields(model: noteModel)
         contentView.addSubview(editingButton)
     }
     
