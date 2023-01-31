@@ -9,7 +9,7 @@ import UIKit
 
 class NewNoteViewController: UIViewController {
 
-    private let titleLabel = UILabel(text: "Новая заметка", font:  .robotoMedium22(), textColor: .specialBlack)
+//    private let titleLabel = UILabel(text: "Новая заметка", font:  .robotoMedium22(), textColor: .specialBlack)
     
     private let titleNoteLabel = UILabel(text: "Название заметки", font: .robotoMedium14(), textColor: .specialLightBrown)
     
@@ -19,13 +19,13 @@ class NewNoteViewController: UIViewController {
     
     public let detailsNoteTextField = BrownTextField()
     
-    private let closeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+//    private let closeButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(named: "closeButton"), for: .normal)
+//        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
     
     private let saveButton: UIButton = {
         let button = UIButton()
@@ -48,19 +48,29 @@ class NewNoteViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubview(titleLabel)
-        view.addSubview(closeButton)
+//        view.addSubview(titleLabel)
+//        view.addSubview(closeButton)
         view.addSubview(titleNoteLabel)
         view.addSubview(titleNoteTextField)
         view.addSubview(detailsNoteLabel)
         view.addSubview(detailsNoteTextField)
         view.addSubview(saveButton)
+        
+        setNavigationBar()
     }
 
-    @objc private func closeButtonTapped() {
-        dismiss(animated: true)
+
+    
+    private func setNavigationBar() {
+        navigationItem.title = "Новая заметка"
+    
     }
     
+//    @objc private func closeButtonTapped() {
+//        let newNoteViewController = NewNoteViewController()
+//        navigationController?.pushViewController(newNoteViewController, animated: true)
+//    }
+//    
     @objc private func saveButtonTapped() {
         setModel()
         saveModel()
@@ -102,13 +112,13 @@ extension NewNoteViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
 
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+//            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+//            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            closeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
+//            closeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+//            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
             
-            titleNoteLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+            titleNoteLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             titleNoteLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
             
             titleNoteTextField.topAnchor.constraint(equalTo: titleNoteLabel.bottomAnchor, constant: 3),

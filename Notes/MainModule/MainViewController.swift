@@ -7,20 +7,33 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+protocol TableViewProtocol: AnyObject {
+    func deleteNote(model: NoteModel, index: Int)
+}
 
-    private let titleLabel = UILabel(text: "Заметки", font: .robotoBold24(), textColor: .specialBlack)
-    
-    private lazy var addNoteButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "plus"), for: .normal)
-        button.addTarget(self, action: #selector(addNoteButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    public let tableView = TableView()
+class MainViewController: UIViewController{
+
+
+//    private let titleLabel = UILabel(text: "Заметки", font: .robotoBold24(), textColor: .specialBlack)
+    weak var mainDelegate: TableViewProtocol?
+    private let idTableView = "idTableView"
+
+    private var notesArray = [NoteModel]()
+
+//    public let tableView = TableView()
     private var noteArray = [NoteModel]()
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .none
+        tableView.separatorStyle = .none
+        tableView.bounces = false
+        tableView.showsVerticalScrollIndicator = false
+        tableView.delaysContentTouches = false
+        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "idTableView")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,37 +48,43 @@ class MainViewController: UIViewController {
         setupViews()
         setConstraints()
         setDelegates()
-        
+        setNavigationBar()
+
         getNotes()
         updateArrayNotes()
     }
 
     private func setupViews() {
-        title = "Заметки"
-        
-//        let navVC = UINavigationController(rootViewController: MainViewController())
-//        navVC.modalPresentationStyle = .fullScreen
-//        self.present(navVC, animated: true)
         
         view.backgroundColor = .specialBackground
-        view.addSubview(titleLabel)
-        view.addSubview(tableView)
-        view.addSubview(addNoteButton)
+//        view.addSubview(titleLabel)
 
+        view.addSubview(tableView)
     }
-    
+
     private func setDelegates() {
-        tableView.mainDelegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+        mainDelegate = self
     }
     
-    @objc private func addNoteButtonTapped() {
-//        let navVC = UINavigationController(rootViewController: NewNoteViewController())
-//        navVC.modalPresentationStyle = .fullScreen
-//        self.present(navVC, animated: true)
+    private func setNavigationBar() {
+        navigationItem.title = "Мои заметки"
         
+//        navigationItem.searchController = searchController
+        
+        let addNewNote = createCustomButton(selector: #selector(addNewNoteTapped))
+        navigationItem.rightBarButtonItem = addNewNote
+    }
+    
+//    private func setupSearchController() {
+//        searchController.searchBar.placeholder = "Search"
+//        searchController.obscuresBackgroundDuringPresentation = false
+//    }
+    
+    @objc private func addNewNoteTapped() {
         let newNoteViewController = NewNoteViewController()
-        newNoteViewController.modalPresentationStyle = .fullScreen
-        present(newNoteViewController, animated: true)
+        navigationController?.pushViewController(newNoteViewController, animated: true)
     }
     
     private func getNotes() {
@@ -75,8 +94,12 @@ class MainViewController: UIViewController {
     }
     
     private func updateArrayNotes() {
-        tableView.setNotesArray(array: noteArray)
+        setNotesArray(array: noteArray)
         tableView.reloadData()
+    }
+    
+    public func setNotesArray(array: [NoteModel]) {
+        notesArray = array
     }
 }
 
@@ -87,23 +110,59 @@ extension MainViewController: TableViewProtocol {
     func deleteNote(model: NoteModel, index: Int) {
         RealmManager.shared.deleteNoteModel(model)
         noteArray.remove(at: index)
-        tableView.setNotesArray(array: noteArray)
+        setNotesArray(array: noteArray)
         tableView.reloadData()
     }
 }
 
-// MARK: - NoteCellProtocol
+//MARK: - UITableViewDataSource
 
-extension MainViewController: NoteCellProtocol {
-  
-    func editingButtonTapped(model: NoteModel) {
-        print("editingButtonTapped")
-//        let editingNoteViewController = EditingNoteViewController()
-//        editingNoteViewController.modalPresentationStyle = .fullScreen
-//        editingNoteViewController.setNoteModel(model)
-//        present(editingNoteViewController, animated: true)
+extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        notesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: idTableView, for: indexPath) as? NoteTableViewCell else {
+            return UITableViewCell()
+        }
+        let noteModel = notesArray[indexPath.row]
+        cell.configure(model: noteModel)
+//        cell.noteCellDelegate = mainDelegate as? NoteCellProtocol
+        return cell
     }
 }
+
+//MARK: - UITableViewDelegate
+
+extension MainViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let editingNoteViewController = EditingNoteViewController()
+            navigationController?.pushViewController(editingNoteViewController, animated: true)
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            let deleteModel = self.notesArray[indexPath.row]
+            self.mainDelegate?.deleteNote(model: deleteModel, index: indexPath.row)
+        }
+
+        action.backgroundColor = .specialBackground
+        action.image = UIImage(named: "Delete")
+
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+}
+
 
 //MARK: - setConstraints
 
@@ -111,18 +170,26 @@ extension MainViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+//            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+//            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            addNoteButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            addNoteButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
-            addNoteButton.heightAnchor.constraint(equalToConstant: 25),
-            addNoteButton.widthAnchor.constraint(equalToConstant: 25),
-            
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+            tableView.topAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.topAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
 }
+
+// MARK: - NoteCellProtocol
+
+//extension MainViewController: NoteCellProtocol {
+//
+//    func editingButtonTapped(model: NoteModel) {
+//        print("editingButtonTapped")
+//        let editingNoteViewController = EditingNoteViewController()
+//        editingNoteViewController.modalPresentationStyle = .fullScreen
+//        editingNoteViewController.setNoteModel(model)
+//        present(editingNoteViewController, animated: true)
+//    }
+//}

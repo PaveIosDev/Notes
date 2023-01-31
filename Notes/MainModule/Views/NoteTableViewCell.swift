@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol NoteCellProtocol: AnyObject {
-    func editingButtonTapped(model: NoteModel)
-}
+//protocol NoteCellProtocol: AnyObject {
+//    func editingButtonTapped(model: NoteModel)
+//}
 
 class NoteTableViewCell: UITableViewCell {
     
@@ -25,15 +25,15 @@ class NoteTableViewCell: UITableViewCell {
     
     private let textNoteLabel = UILabel(text: "text", font: .robotoMedium12(), textColor: .specialBlack)
     
-    private lazy var editingButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "Edit"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(editingButtonTapped), for: .touchUpInside)
-        return button
-    }()
+//    private lazy var editingButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setImage(UIImage(named: "Edit"), for: .normal)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.addTarget(self, action: #selector(editingButtonTapped), for: .touchUpInside)
+//        return button
+//    }()
 
-    weak var noteCellDelegate: NoteCellProtocol?
+//    weak var noteCellDelegate: NoteCellProtocol?
     
     private var noteModel = NoteModel()
     
@@ -49,17 +49,17 @@ class NoteTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        selectionStyle = .none
+//        selectionStyle = .none
         backgroundColor = .clear
         addSubview(cellView)
         addSubview(titleNoteLabel)
         addSubview(textNoteLabel)
-        contentView.addSubview(editingButton)
+//        contentView.addSubview(editingButton)
     }
     
-    @objc private func editingButtonTapped() {
-        noteCellDelegate?.editingButtonTapped(model: noteModel)
-    }
+//    @objc private func editingButtonTapped() {
+//        noteCellDelegate?.editingButtonTapped(model: noteModel)
+//    }
     
     public func configure(model: NoteModel) {
         titleNoteLabel.text = model.noteName
@@ -90,8 +90,8 @@ extension NoteTableViewCell {
             textNoteLabel.topAnchor.constraint(equalTo: titleNoteLabel.bottomAnchor, constant: 15),
             textNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
             
-            editingButton.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
-            editingButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -27)
+//            editingButton.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
+//            editingButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -27)
         ])
     }
 }
