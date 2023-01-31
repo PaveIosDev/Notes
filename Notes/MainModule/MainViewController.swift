@@ -41,6 +41,12 @@ class MainViewController: UIViewController {
     }
 
     private func setupViews() {
+        title = "Заметки"
+        
+//        let navVC = UINavigationController(rootViewController: MainViewController())
+//        navVC.modalPresentationStyle = .fullScreen
+//        self.present(navVC, animated: true)
+        
         view.backgroundColor = .specialBackground
         view.addSubview(titleLabel)
         view.addSubview(tableView)
@@ -53,6 +59,10 @@ class MainViewController: UIViewController {
     }
     
     @objc private func addNoteButtonTapped() {
+//        let navVC = UINavigationController(rootViewController: NewNoteViewController())
+//        navVC.modalPresentationStyle = .fullScreen
+//        self.present(navVC, animated: true)
+        
         let newNoteViewController = NewNoteViewController()
         newNoteViewController.modalPresentationStyle = .fullScreen
         present(newNoteViewController, animated: true)
@@ -87,10 +97,11 @@ extension MainViewController: TableViewProtocol {
 extension MainViewController: NoteCellProtocol {
   
     func editingButtonTapped(model: NoteModel) {
-        let editingNoteViewController = EditingNoteViewController()
-        editingNoteViewController.modalPresentationStyle = .fullScreen
-        editingNoteViewController.setNoteModel(model)
-        present(editingNoteViewController, animated: true)
+        print("editingButtonTapped")
+//        let editingNoteViewController = EditingNoteViewController()
+//        editingNoteViewController.modalPresentationStyle = .fullScreen
+//        editingNoteViewController.setNoteModel(model)
+//        present(editingNoteViewController, animated: true)
     }
 }
 

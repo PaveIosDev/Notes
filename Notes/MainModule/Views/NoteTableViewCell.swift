@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 protocol NoteCellProtocol: AnyObject {
     func editingButtonTapped(model: NoteModel)

@@ -77,6 +77,17 @@ extension TableView: UITableViewDelegate {
         80
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                let editingNoteViewController = EditingNoteViewController()
+                editingNoteViewController.modalPresentationStyle = .fullScreen
+//                present(editingNoteViewController, animated: true)
+
+//                editingNoteViewController.setNoteModel(model)
+        
+//        let detailAlbumViewController = DetailAlbumViewController()
+//        navigationController?.pushViewController(detailAlbumViewController, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
             let deleteModel = self.notesArray[indexPath.row]

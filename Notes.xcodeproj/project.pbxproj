@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C41C1B672958925600BE4BD0 /* EditingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41C1B662958925600BE4BD0 /* EditingNoteViewController.swift */; };
 		C41C1B692958DC9800BE4BD0 /* UIViewController + Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41C1B682958DC9800BE4BD0 /* UIViewController + Extentions.swift */; };
+		C425984529897B6F00AB1C1A /* UIViewController + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425984429897B6F00AB1C1A /* UIViewController + Extention.swift */; };
 		C425D98C2954B8A100ADA01B /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */; };
 		C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */; };
 		C425D9912954C16C00ADA01B /* BrownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425D9902954C16C00ADA01B /* BrownTextField.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		C41C1B662958925600BE4BD0 /* EditingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingNoteViewController.swift; sourceTree = "<group>"; };
 		C41C1B682958DC9800BE4BD0 /* UIViewController + Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extentions.swift"; sourceTree = "<group>"; };
+		C425984429897B6F00AB1C1A /* UIViewController + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extention.swift"; sourceTree = "<group>"; };
 		C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		C425D9902954C16C00ADA01B /* BrownTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrownTextField.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				C492A1FD29539AAB0027002E /* UILabel + extentions.swift */,
 				C425D98D2954BCAF00ADA01B /* UIColor + Extensions.swift */,
 				C41C1B682958DC9800BE4BD0 /* UIViewController + Extentions.swift */,
+				C425984429897B6F00AB1C1A /* UIViewController + Extention.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				C492A1E4295387BC0027002E /* SceneDelegate.swift in Sources */,
 				C425D98E2954BCAF00ADA01B /* UIColor + Extensions.swift in Sources */,
 				C425D9982954D46F00ADA01B /* NoteModel.swift in Sources */,
+				C425984529897B6F00AB1C1A /* UIViewController + Extention.swift in Sources */,
 				C492A1FC295398CB0027002E /* UIFont + extentions.swift in Sources */,
 				C425D9912954C16C00ADA01B /* BrownTextField.swift in Sources */,
 				C492A1FE29539AAB0027002E /* UILabel + extentions.swift in Sources */,
