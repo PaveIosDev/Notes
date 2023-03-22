@@ -7,9 +7,9 @@
 
 import UIKit
 
-//protocol NoteCellProtocol: AnyObject {
-//    func editingButtonTapped(model: NoteModel)
-//}
+protocol NoteCellProtocol: AnyObject {
+    func editingButtonTapped(model: NoteModel)
+}
 
 class NoteTableViewCell: UITableViewCell {
     
@@ -33,7 +33,7 @@ class NoteTableViewCell: UITableViewCell {
 //        return button
 //    }()
 
-//    weak var noteCellDelegate: NoteCellProtocol?
+    weak var noteCellDelegate: NoteCellProtocol?
     
     private var noteModel = NoteModel()
     
@@ -66,10 +66,10 @@ class NoteTableViewCell: UITableViewCell {
         textNoteLabel.text = model.noteDetail
     }
 
-    public func refreshLables(model: NoteModel) {
-        titleNoteLabel.text = model.noteName
-        textNoteLabel.text = model.noteDetail
-    }
+//    public func refreshLables(model: NoteModel) {
+//        titleNoteLabel.text = model.noteName
+//        textNoteLabel.text = model.noteDetail
+//    }
 }
 
 //MARK: - setConstraints

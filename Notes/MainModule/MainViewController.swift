@@ -40,6 +40,8 @@ class MainViewController: UIViewController{
         
         getNotes()
         updateArrayNotes()
+        
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -101,6 +103,7 @@ class MainViewController: UIViewController{
     public func setNotesArray(array: [NoteModel]) {
         notesArray = array
     }
+    
 }
 
 // MARK: - TableViewProtocol
@@ -129,7 +132,7 @@ extension MainViewController: UITableViewDataSource {
         }
         let noteModel = notesArray[indexPath.row]
         cell.configure(model: noteModel)
-//        cell.noteCellDelegate = mainDelegate as? NoteCellProtocol
+        cell.noteCellDelegate = mainDelegate as? NoteCellProtocol
         return cell
     }
 }
@@ -144,8 +147,11 @@ extension MainViewController: UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let editingNoteViewController = EditingNoteViewController()
-            navigationController?.pushViewController(editingNoteViewController, animated: true)
+        let editingNoteViewController = EditingNoteViewController()
+        let note = noteArray[indexPath.row]
+        editingNoteViewController.editingNote = note
+        editingNoteViewController.title = note.noteName
+        navigationController?.pushViewController(editingNoteViewController, animated: true)
     }
     
     
@@ -183,13 +189,13 @@ extension MainViewController {
 
 // MARK: - NoteCellProtocol
 
-//extension MainViewController: NoteCellProtocol {
-//
-//    func editingButtonTapped(model: NoteModel) {
-//        print("editingButtonTapped")
-//        let editingNoteViewController = EditingNoteViewController()
-//        editingNoteViewController.modalPresentationStyle = .fullScreen
-//        editingNoteViewController.setNoteModel(model)
-//        present(editingNoteViewController, animated: true)
-//    }
-//}
+extension MainViewController: NoteCellProtocol {
+
+    func editingButtonTapped(model: NoteModel) {
+        print("editingButtonTapped")
+        let editingNoteViewController = EditingNoteViewController()
+        editingNoteViewController.modalPresentationStyle = .fullScreen
+        editingNoteViewController.setNoteModel(model)
+        present(editingNoteViewController, animated: true)
+    }
+}

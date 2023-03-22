@@ -38,6 +38,7 @@ class EditingNoteViewController: UIViewController {
     }()
     
     private var noteModel = NoteModel()
+    var editingNote: NoteModel?
     
     private let noteTableViewCell = NoteTableViewCell() // !!!!!!!!!
     private let tableView = TableView() //!!!!!
@@ -47,6 +48,7 @@ class EditingNoteViewController: UIViewController {
 
         setupViews()
         setConstraints()
+
     }
     
     private func setupViews() {
@@ -57,7 +59,7 @@ class EditingNoteViewController: UIViewController {
         view.addSubview(editingTitleTextField)
         view.addSubview(editingDetailsLabel)
         view.addSubview(editingDetailsTextField)
-        refreshTextFields(model: noteModel)
+        refreshTextFields()
         view.addSubview(saveButton)
     }
     
@@ -66,28 +68,39 @@ class EditingNoteViewController: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
-        setNoteModel(noteModel)
-        updateNoteModel()
+//        setNoteModel(noteModel)
+        updateNoteModel(model: noteModel)
+
     }
     
     public func setNoteModel(_ model: NoteModel) {
         noteModel = model
         noteModel.noteName = getEditingTitleTextFieldText()
         noteModel.noteDetail = getEditingDetailsNoteTextFieldText()
+        print("собрали модель : \(noteModel)")
     }
-    
-    public func refreshTextFields(model: NoteModel) {
+  
+    public func refreshTextFields() {
         
-        editingTitleTextField.text = model.noteName
-        editingDetailsTextField.text = model.noteDetail
+        guard let editingNote = editingNote else { return }
+        
+        editingTitleTextField.text = editingNote.noteName
+        editingDetailsTextField.text = editingNote.noteDetail
     }
     
-    public func updateNoteModel() {
+//    public func refreshTextFields(model: NoteModel) {
+//
+//        editingTitleTextField.text = model.noteName
+//        editingDetailsTextField.text = model.noteDetail
+//    }
+    
+    public func updateNoteModel(model: NoteModel) {
             RealmManager.shared.updateNoteModel(noteModel)
             presentSimpleAlert(title: "Успешно", message: nil)
-            self.noteTableViewCell.refreshLables(model: noteModel)
+            setNoteModel(noteModel)
+        //            self.noteTableViewCell.refreshLables(model: noteModel)
             tableView.reloadData()
-            print(noteModel)    
+            print("обновили модель : \(noteModel)")
     }
     
     private func getEditingTitleTextFieldText() -> String {
