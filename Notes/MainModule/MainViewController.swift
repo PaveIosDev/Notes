@@ -187,15 +187,15 @@ extension MainViewController {
     }
 }
 
-// MARK: - NoteCellProtocol
-
-extension MainViewController: NoteCellProtocol {
-
-    func editingButtonTapped(model: NoteModel) {
-        print("editingButtonTapped")
-        let editingNoteViewController = EditingNoteViewController()
-        editingNoteViewController.modalPresentationStyle = .fullScreen
-        editingNoteViewController.setNoteModel(model)
-        present(editingNoteViewController, animated: true)
-    }
-}
+//// MARK: - NoteCellProtocol
+//
+//extension MainViewController: NoteCellProtocol {
+//
+//    func editingButtonTapped(model: NoteModel) {
+//        print("editingButtonTapped")
+//        let editingNoteViewController = EditingNoteViewController()
+//        editingNoteViewController.modalPresentationStyle = .fullScreen
+//        editingNoteViewController.setNoteModel(model)
+//        present(editingNoteViewController, animated: true)
+//    }
+//}

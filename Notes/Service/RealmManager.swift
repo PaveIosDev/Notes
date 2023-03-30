@@ -6,6 +6,7 @@
 //
 
 import RealmSwift
+import Foundation
 
 class RealmManager {
     
@@ -32,8 +33,16 @@ class RealmManager {
     
     func updateNoteModel(_ model: NoteModel) {
         try! realm.write {
-            model.noteName = model.noteName
-            model.noteDetail = model.noteDetail
+            
+            let notes = realm.objects(NoteModel.self)
+            
+            realm.add(notes)
+
+//            notes[3].noteName = model.noteName
+//            notes[3].noteDetail = model.noteDetail
+            
+//            model.noteName = model.noteName
+//            model.noteDetail = model.noteDetail
         }
     }
 }

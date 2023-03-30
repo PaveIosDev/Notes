@@ -39,9 +39,8 @@ class EditingNoteViewController: UIViewController {
     
     private var noteModel = NoteModel()
     var editingNote: NoteModel?
-    
+    private let noteArray = [NoteModel]()
     private let noteTableViewCell = NoteTableViewCell() // !!!!!!!!!
-    private let tableView = TableView() //!!!!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +58,8 @@ class EditingNoteViewController: UIViewController {
         view.addSubview(editingTitleTextField)
         view.addSubview(editingDetailsLabel)
         view.addSubview(editingDetailsTextField)
-        refreshTextFields()
         view.addSubview(saveButton)
+        refreshTextFields()
     }
     
     @objc private func closeButtonTapped() {
@@ -68,18 +67,21 @@ class EditingNoteViewController: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
-//        setNoteModel(noteModel)
-        updateNoteModel(model: noteModel)
+        setNoteModel()
+        
+        let notes = RealmManager.shared.getResultsNoteModel()
+        
+        if notes.count > noteArray.count {
+            RealmManager.shared.updateNoteModel(noteModel)
+            print("сохраняем отредактированную заметку : \(noteModel)")
+        } else {
+            RealmManager.shared.saveNoteModel(noteModel)
+            print("оставляем как есть : \(noteModel)")
+        }
+        noteModel = NoteModel()
 
     }
     
-    public func setNoteModel(_ model: NoteModel) {
-        noteModel = model
-        noteModel.noteName = getEditingTitleTextFieldText()
-        noteModel.noteDetail = getEditingDetailsNoteTextFieldText()
-        print("собрали модель : \(noteModel)")
-    }
-  
     public func refreshTextFields() {
         
         guard let editingNote = editingNote else { return }
@@ -88,29 +90,33 @@ class EditingNoteViewController: UIViewController {
         editingDetailsTextField.text = editingNote.noteDetail
     }
     
-//    public func refreshTextFields(model: NoteModel) {
-//
-//        editingTitleTextField.text = model.noteName
-//        editingDetailsTextField.text = model.noteDetail
-//    }
-    
-    public func updateNoteModel(model: NoteModel) {
-            RealmManager.shared.updateNoteModel(noteModel)
-            presentSimpleAlert(title: "Успешно", message: nil)
-            setNoteModel(noteModel)
-        //            self.noteTableViewCell.refreshLables(model: noteModel)
-            tableView.reloadData()
-            print("обновили модель : \(noteModel)")
+    public func setNoteModel() {
+        guard let titleText = editingTitleTextField.text,
+              let detailText = editingDetailsTextField.text else {
+                  return
+              }
+        
+        noteModel.noteName = titleText
+        noteModel.noteDetail = detailText
+        refreshTextFields()
+        print("собрали модель : \(noteModel)")
+
     }
     
-    private func getEditingTitleTextFieldText() -> String {
-        guard let text = editingTitleTextField.text else { return "" }
-        return text
-    }
-    
-    private func getEditingDetailsNoteTextFieldText() -> String {
-        guard let text = editingDetailsTextField.text else { return "" }
-        return text
+    public func updateNoteModel() {
+        
+        let noteArray = RealmManager.shared.getResultsNoteModel()
+        
+        if noteArray.count != 0 {
+            editingTitleTextField.text = noteArray[0].noteName
+            editingDetailsTextField.text = noteArray[0].noteDetail
+        }
+        
+        refreshTextFields()
+//            presentSimpleAlert(title: "Успешно", message: nil)
+//            setNoteModel()
+//            tableView.reloadData()
+//            print("обновили модель : \(noteModel)")
     }
 }
 
