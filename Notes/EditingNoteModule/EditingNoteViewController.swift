@@ -47,7 +47,6 @@ class EditingNoteViewController: UIViewController {
 
         setupViews()
         setConstraints()
-
     }
     
     private func setupViews() {
@@ -111,12 +110,7 @@ class EditingNoteViewController: UIViewController {
             editingTitleTextField.text = noteArray[0].noteName
             editingDetailsTextField.text = noteArray[0].noteDetail
         }
-        
         refreshTextFields()
-//            presentSimpleAlert(title: "Успешно", message: nil)
-//            setNoteModel()
-//            tableView.reloadData()
-//            print("обновили модель : \(noteModel)")
     }
 }
 

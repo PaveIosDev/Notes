@@ -7,9 +7,9 @@
 
 import UIKit
 
-class NewNoteViewController: UIViewController {
+// класс новая заметка
 
-//    private let titleLabel = UILabel(text: "Новая заметка", font:  .robotoMedium22(), textColor: .specialBlack)
+class NewNoteViewController: UIViewController {
     
     private let titleNoteLabel = UILabel(text: "Название заметки", font: .robotoMedium14(), textColor: .specialLightBrown)
     
@@ -48,8 +48,6 @@ class NewNoteViewController: UIViewController {
     }
     
     private func setupViews() {
-//        view.addSubview(titleLabel)
-//        view.addSubview(closeButton)
         view.addSubview(titleNoteLabel)
         view.addSubview(titleNoteTextField)
         view.addSubview(detailsNoteLabel)
@@ -58,28 +56,24 @@ class NewNoteViewController: UIViewController {
         
         setNavigationBar()
     }
-
-
     
     private func setNavigationBar() {
         navigationItem.title = "Новая заметка"
-    
     }
     
-//    @objc private func closeButtonTapped() {
-//        let newNoteViewController = NewNoteViewController()
-//        navigationController?.pushViewController(newNoteViewController, animated: true)
-//    }
-//    
     @objc private func saveButtonTapped() {
         setModel()
         saveModel()
     }
     
+//    настройка модели
+    
     private func setModel() {
         noteModel.noteName = getTitleTextFieldText()
         noteModel.noteDetail = getDetailsNoteTextFieldText()
     }
+    
+//    сохранение модели
     
     private func saveModel() {
         let text = getTitleTextFieldText()
@@ -93,10 +87,14 @@ class NewNoteViewController: UIViewController {
         }
     }
     
+//    Получение текста из текстового поля "название заметки"
+    
     private func getTitleTextFieldText() -> String {
         guard let text = titleNoteTextField.text else { return "" }
         return text
     }
+    
+//    Получение текста из текстового поля "детали заметки"
     
     private func getDetailsNoteTextFieldText() -> String {
         guard let text = detailsNoteTextField.text else { return "" }
@@ -104,19 +102,12 @@ class NewNoteViewController: UIViewController {
     }
 }
 
-
 //MARK: - setConstraints
 
 extension NewNoteViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-
-//            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
-//            closeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-//            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
             
             titleNoteLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             titleNoteLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),

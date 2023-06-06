@@ -14,7 +14,6 @@ protocol TableViewProtocol: AnyObject {
 class MainViewController: UIViewController{
 
 
-//    private let titleLabel = UILabel(text: "Заметки", font: .robotoBold24(), textColor: .specialBlack)
     weak var mainDelegate: TableViewProtocol?
     private let idTableView = "idTableView"
 
@@ -72,17 +71,9 @@ class MainViewController: UIViewController{
     
     private func setNavigationBar() {
         navigationItem.title = "Мои заметки"
-        
-//        navigationItem.searchController = searchController
-        
         let addNewNote = createCustomButton(selector: #selector(addNewNoteTapped))
         navigationItem.rightBarButtonItem = addNewNote
     }
-    
-//    private func setupSearchController() {
-//        searchController.searchBar.placeholder = "Search"
-//        searchController.obscuresBackgroundDuringPresentation = false
-//    }
     
     @objc private func addNewNoteTapped() {
         let newNoteViewController = NewNoteViewController()
@@ -145,7 +136,6 @@ extension MainViewController: UITableViewDelegate {
         80
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let editingNoteViewController = EditingNoteViewController()
         let note = noteArray[indexPath.row]
@@ -153,8 +143,6 @@ extension MainViewController: UITableViewDelegate {
         editingNoteViewController.title = note.noteName
         navigationController?.pushViewController(editingNoteViewController, animated: true)
     }
-    
-    
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
@@ -176,9 +164,6 @@ extension MainViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-//            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
             tableView.topAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.topAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),

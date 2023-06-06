@@ -22,7 +22,6 @@
 		C492A1E6295387BC0027002E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1E5295387BC0027002E /* MainViewController.swift */; };
 		C492A1EB295387C00027002E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C492A1EA295387BF0027002E /* Assets.xcassets */; };
 		C492A1EE295387C00027002E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C492A1EC295387C00027002E /* LaunchScreen.storyboard */; };
-		C492A1F629538A640027002E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1F529538A640027002E /* TableView.swift */; };
 		C492A1F8295394830027002E /* NewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1F7295394830027002E /* NewNoteViewController.swift */; };
 		C492A1FC295398CB0027002E /* UIFont + extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1FB295398CB0027002E /* UIFont + extentions.swift */; };
 		C492A1FE29539AAB0027002E /* UILabel + extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492A1FD29539AAB0027002E /* UILabel + extentions.swift */; };
@@ -46,7 +45,6 @@
 		C492A1EA295387BF0027002E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C492A1ED295387C00027002E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C492A1EF295387C00027002E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C492A1F529538A640027002E /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		C492A1F7295394830027002E /* NewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteViewController.swift; sourceTree = "<group>"; };
 		C492A1FB295398CB0027002E /* UIFont + extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + extentions.swift"; sourceTree = "<group>"; };
 		C492A1FD29539AAB0027002E /* UILabel + extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + extentions.swift"; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				C425D98B2954B8A100ADA01B /* NoteTableViewCell.swift */,
-				C492A1F529538A640027002E /* TableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,7 +286,6 @@
 				C425D98C2954B8A100ADA01B /* NoteTableViewCell.swift in Sources */,
 				C492A1E6295387BC0027002E /* MainViewController.swift in Sources */,
 				C41C1B692958DC9800BE4BD0 /* UIViewController + Extentions.swift in Sources */,
-				C492A1F629538A640027002E /* TableView.swift in Sources */,
 				C492A1E2295387BC0027002E /* AppDelegate.swift in Sources */,
 				C425D99B2955F5C300ADA01B /* RealmManager.swift in Sources */,
 				C41C1B672958925600BE4BD0 /* EditingNoteViewController.swift in Sources */,

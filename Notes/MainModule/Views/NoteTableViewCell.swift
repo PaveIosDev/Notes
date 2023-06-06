@@ -54,12 +54,7 @@ class NoteTableViewCell: UITableViewCell {
         addSubview(cellView)
         addSubview(titleNoteLabel)
         addSubview(textNoteLabel)
-//        contentView.addSubview(editingButton)
     }
-    
-//    @objc private func editingButtonTapped() {
-//        noteCellDelegate?.editingButtonTapped(model: noteModel)
-//    }
     
     public func configure(model: NoteModel) {
         titleNoteLabel.text = model.noteName
@@ -88,10 +83,7 @@ extension NoteTableViewCell {
             titleNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
             
             textNoteLabel.topAnchor.constraint(equalTo: titleNoteLabel.bottomAnchor, constant: 15),
-            textNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            
-//            editingButton.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
-//            editingButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -27)
+            textNoteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25)
         ])
     }
 }
