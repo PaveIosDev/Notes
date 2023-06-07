@@ -32,17 +32,13 @@ class RealmManager {
     }
     
     func updateNoteModel(_ model: NoteModel) {
+        guard let note = realm.objects(NoteModel.self)
+            .filter("date = %@", model.date)
+            .first
+        else { return }
         try! realm.write {
-            
-            let notes = realm.objects(NoteModel.self)
-            
-            realm.add(notes)
-
-//            notes[3].noteName = model.noteName
-//            notes[3].noteDetail = model.noteDetail
-            
-//            model.noteName = model.noteName
-//            model.noteDetail = model.noteDetail
+            note.noteName = model.noteName
+            note.noteDetail = model.noteDetail
         }
     }
 }

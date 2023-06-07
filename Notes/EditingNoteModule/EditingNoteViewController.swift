@@ -39,8 +39,6 @@ class EditingNoteViewController: UIViewController {
     
     private var noteModel = NoteModel()
     var editingNote: NoteModel?
-    private let noteArray = [NoteModel]()
-    private let noteTableViewCell = NoteTableViewCell() // !!!!!!!!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,29 +65,19 @@ class EditingNoteViewController: UIViewController {
     
     @objc private func saveButtonTapped() {
         setNoteModel()
-        
-        let notes = RealmManager.shared.getResultsNoteModel()
-        
-        if notes.count > noteArray.count {
-            RealmManager.shared.updateNoteModel(noteModel)
-            print("сохраняем отредактированную заметку : \(noteModel)")
-        } else {
-            RealmManager.shared.saveNoteModel(noteModel)
-            print("оставляем как есть : \(noteModel)")
-        }
-        noteModel = NoteModel()
-
+                
+        RealmManager.shared.updateNoteModel(noteModel)
+        print("сохраняем отредактированную заметку : \(noteModel)")
     }
     
-    public func refreshTextFields() {
-        
-        guard let editingNote = editingNote else { return }
+    private func refreshTextFields() {
+        guard let editingNote else { return }
         
         editingTitleTextField.text = editingNote.noteName
         editingDetailsTextField.text = editingNote.noteDetail
     }
     
-    public func setNoteModel() {
+    private func setNoteModel() {
         guard let titleText = editingTitleTextField.text,
               let detailText = editingDetailsTextField.text else {
                   return
@@ -97,21 +85,10 @@ class EditingNoteViewController: UIViewController {
         
         noteModel.noteName = titleText
         noteModel.noteDetail = detailText
-        refreshTextFields()
+        noteModel.date = editingNote?.date ?? .init()
         print("собрали модель : \(noteModel)")
-
     }
     
-    public func updateNoteModel() {
-        
-        let noteArray = RealmManager.shared.getResultsNoteModel()
-        
-        if noteArray.count != 0 {
-            editingTitleTextField.text = noteArray[0].noteName
-            editingDetailsTextField.text = noteArray[0].noteDetail
-        }
-        refreshTextFields()
-    }
 }
 
 //MARK: - setConstraints
